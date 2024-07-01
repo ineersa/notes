@@ -19,6 +19,8 @@ cc: ## clear cache related things
 	php artisan config:clear
 	php artisan event:clear
 	php artisan optimize
+	sudo chmod -R 777 ./storage
+	sudo chmod -R g+w ./
 
 storage: ## link storage
 	php artisan storage:unlink

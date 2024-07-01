@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('user_databases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->text('content')->comment("Content of the note in markdown format");
-            $table->boolean('archived')->default(false)->comment("Is note archived");
+            $table->string("db_name")->unique()->nullable(false);
+            $table->string("db_password")->nullable(false);
+            $table->json("options")->nullable(true);
+
+            $table->foreignId("user_id")->constrained("users")->restrictOnDelete();
+
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('user_databases');
     }
 };

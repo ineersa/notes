@@ -32,9 +32,13 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="min-h-screen-3/4">
                 {{ $slot }}
             </main>
+
+            <footer>
+                <livewire:layout.footer>
+            </footer>
         </div>
     </body>
 </html>

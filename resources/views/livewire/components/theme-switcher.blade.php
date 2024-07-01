@@ -6,6 +6,8 @@ new class extends Component {
 
     public string $theme = 'system';
 
+    protected $listeners = ['theme-switcher.change-theme' => 'setTheme'];
+
     public function mount(): void
     {
         $this->theme = session('theme', 'system');
@@ -15,13 +17,13 @@ new class extends Component {
     public function updatedTheme($value): void
     {
         session(['theme' => $value]);
-        $this->dispatch('theme-changed', theme: $value);
+        $this->dispatch('theme-switcher.theme-changed', theme: $value);
     }
 
-    public function setTheme($value): void
+    public function setTheme($theme): void
     {
-        $this->theme = $value;
-        $this->updatedTheme($value);
+        $this->theme = $theme;
+        $this->updatedTheme($theme);
     }
 
     public function getSystemTheme(): string
@@ -77,7 +79,7 @@ new class extends Component {
             </template>
         </button>
     </div>
-    <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 top-16 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800" aria-labelledby="mode-select-button" role="menu" tabindex="-1">
+    <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 top-8 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800" aria-labelledby="mode-select-button" role="menu" tabindex="-1">
         <div class="p-1" role="none">
             <button @click="$wire.setTheme('light'); dropdownOpen = false" class="group flex w-full items-center rounded-md px-2 py-2 text-sm" role="menuitem" tabindex="-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6 text-gray-900 dark:text-gray-100 mr-2">
