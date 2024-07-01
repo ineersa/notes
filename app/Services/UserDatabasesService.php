@@ -39,20 +39,6 @@ class UserDatabasesService
                 'database' => null,
                 'prefix' => '',
             ]);
-            // to use it in tinker
-            //            $db = \App\Models\UserDatabase::whereUserId(1)->first();
-            //            \Config::set('database.connections.libsql', [
-            //                'driver' => 'libsql',
-            //                'url' => 'file:users_databases/'.$db->db_name,
-            //                'encryptionKey' => \Crypt::decryptString($db->db_password),
-            //                'authToken' => '',
-            //                'syncUrl' => '',
-            //                'syncInterval' => 5,
-            //                'read_your_writes' => true,
-            //                'remoteOnly' => false,
-            //                'database' => null,
-            //                'prefix' => '',
-            //            ]);
         }
     }
 
