@@ -50,7 +50,6 @@ class TenantsMigrateInstall extends Command
             $this->userDatabasesService->setupDatabase($tenant->user_id);
 
             $this->repository->setSource($this->input->getOption('database'));
-
             $this->repository->createRepository();
 
             $this->components->info('Migration table created successfully for tenant #'.$tenant->user_id);

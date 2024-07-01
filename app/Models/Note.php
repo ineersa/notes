@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 //Schema::create('notes', function (Blueprint $table) {
 //    $table->id();
@@ -24,9 +23,4 @@ class Note extends Model
         'id',
         'created_at',
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
