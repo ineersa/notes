@@ -19,6 +19,10 @@ cc: ## clear cache related things
 	php artisan config:clear
 	php artisan event:clear
 	php artisan optimize
+	php artisan icons:cache
+	php artisan filament:cache-components
+
+rights: ## set rights for storage directory
 	sudo chmod -R 777 ./storage
 	sudo chmod -R g+w ./
 
@@ -26,6 +30,6 @@ storage: ## link storage
 	php artisan storage:unlink
 	php artisan storage:link
 
-.PHONY: help logs helper helper-install storage
+.PHONY: help logs helper helper-install storage rights
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

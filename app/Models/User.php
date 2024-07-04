@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Contracts\IsActiveUserContract;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, IsActiveUserContract
 {
     use HasFactory, Notifiable;
 
@@ -21,6 +22,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+    ];
+
+    protected $guarded = [
+        'is_admin',
+        'active',
     ];
 
     /**
@@ -54,5 +60,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function db(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(UserDatabase::class);
+    }
+
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        return $this->is_admin;
+    }
+
+    public function isActiveUser(): bool
+    {
+        return $this->active;
+    }
+
+    public function redirectRoute(): string
+    {
+        return 'auth.banned';
     }
 }

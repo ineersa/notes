@@ -4,7 +4,7 @@ namespace App\Services;
 
 class UserDatabasesService
 {
-    public const CONNECTION_NAME = 'libsql';
+    public const CONNECTION_NAME = 'user_db';
 
     public function __construct(
         private readonly \Illuminate\Encryption\Encrypter $encrypter,
@@ -29,7 +29,7 @@ class UserDatabasesService
 
             \Config::set('database.connections.'.self::CONNECTION_NAME, [
                 'driver' => 'libsql',
-                'url' => 'file:'.$this->getFilename($db->db_name),
+                'url' => 'libsql::file:'.$this->getFilename($db->db_name),
                 'encryptionKey' => $this->encrypter->decryptString($db->db_password),
                 'authToken' => '',
                 'syncUrl' => '',

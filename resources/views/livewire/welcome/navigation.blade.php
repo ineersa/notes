@@ -1,12 +1,6 @@
 <nav class="-mx-3 flex flex-1 justify-end">
     <!-- Navigation Menu -->
-    @auth
-        <div class="flex space-x-8 -my-px ms-10">
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
-            </x-nav-link>
-        </div>
-    @else
+    @guest
         <div class="flex space-x-8 -my-px ms-10">
             <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
                 {{ __('Login') }}
@@ -20,7 +14,7 @@
                 </x-nav-link>
             </div>
         @endif
-    @endauth
-    <livewire:components.theme-switcher />
+    @endguest
+    <livewire:components.theme-switcher/>
 
 </nav>
