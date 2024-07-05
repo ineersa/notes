@@ -13,7 +13,6 @@ class UserDatabasesServiceProvider extends ServiceProvider
         $this->app->singleton(UserDatabasesService::class, function (Application $app) {
             return new UserDatabasesService(
                 $app->get('encrypter'),
-                storage_path('databases')
             );
         });
     }

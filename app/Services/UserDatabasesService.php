@@ -29,7 +29,7 @@ class UserDatabasesService
 
             \Config::set('database.connections.'.self::CONNECTION_NAME, [
                 'driver' => 'libsql',
-                'url' => 'libsql::file:'.$this->getFilename($db->db_name),
+                'url' => 'libsql::file:'.database_path($this->getFilename($db->db_name)),
                 'encryptionKey' => $this->encrypter->decryptString($db->db_password),
                 'authToken' => '',
                 'syncUrl' => '',
