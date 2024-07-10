@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\NotesService;
 use App\Services\UserDatabasesService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +54,17 @@ class TenantQueryHelper extends Command
             $this->info('Use --help for more information');
         }
 
-        return 0;
+//        $model = new \App\Models\Note(["content" => "# Hi\n\ntesting 123 123\n\n[Test](https://test.com)"]);
+//        $model->public = false;
+//        $model->shared = false;
+//        $model->archived = false;
+//        $model->metadata = [];
+//
+//        $model->save();
+//        $model->refresh();
+//        dd($model);
+
+        return self::SUCCESS;
     }
 
     protected function showTables()
@@ -145,8 +156,13 @@ class TenantQueryHelper extends Command
                     $this->output->writeln(str_repeat('-', strlen("No results found.")));
                     continue;
                 }
-                $this->table(array_keys((array)$results[0]), array_map(function($item) {
-                    return (array)$item;
+                $keys = array_keys((array)$results[0]);
+                $this->table($keys, array_map(function($item) use ($keys){
+                    $row = [];
+                    foreach ($keys as $key) {
+                        $row[$key] = $item[$key];
+                    }
+                    return $row;
                 }, $results));
                 $this->output->writeln(" ");
             } elseif ($query['type'] === 'INSERT') {
@@ -165,9 +181,9 @@ class TenantQueryHelper extends Command
                 $this->info("Affected rows: " . $affected);
                 $this->output->writeln(str_repeat('-', $max));
             }
-
-
         }
+
+
 
         return self::SUCCESS;
     }

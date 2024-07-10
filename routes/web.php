@@ -18,6 +18,8 @@ Route::middleware([
         Route::get('notes/{type}', NotesTypeController::class)
             ->whereIn('type', ['shared', 'public', 'archived'])
             ->name('notes-with-type');
+        Volt::route('notes/create', 'pages.notes.create')
+            ->name('notes-create');
         Volt::route('profile', 'pages.profile.profile')
             ->name('profile');
     });

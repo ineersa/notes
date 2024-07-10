@@ -9,11 +9,12 @@
         "ext-pdo": "*",
         "ext-sqlite3": "*",
         "filament/filament": "^3.2",
+        "filament/spatie-laravel-tags-plugin": "^3.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
-        "tursodatabase/turso-driver-laravel": "dev-fix-connection",
+        "tursodatabase/turso-driver-laravel": "dev-dev-branch",
         "wireui/wireui": "^2.0"
     },
     "require-dev": {

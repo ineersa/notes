@@ -25,6 +25,7 @@ cc: ## clear cache related things
 rights: ## set rights for storage directory
 	sudo chmod -R 777 ./storage
 	sudo chmod -R g+w ./
+	sudo chmod -R 777 ./database/users_databases
 
 storage: ## link storage
 	php artisan storage:unlink

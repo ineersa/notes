@@ -121,6 +121,11 @@ return [
             'remoteOnly' => env('DB_REMOTE_ONLY', false),
             'prefix' => '',
         ],
+
+        \App\Services\UserDatabasesService::CONNECTION_NAME => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+        ],
     ],
 
     /*

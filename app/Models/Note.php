@@ -4,23 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-//Schema::create('notes', function (Blueprint $table) {
-//    $table->id();
-//    $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-//    $table->text('content')->comment("Content of the note in markdown format");
-//    $table->boolean('archived')->default(false)->comment("Is note archived");
-//    $table->timestamps();
-//});
 
+/**
+ * @property int $id
+ * @property string $content
+ * @property array|null $metadata
+ * @property bool $shared
+ * @property bool $public
+ * @property bool $archived
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ */
 class Note extends Model
 {
+    use \Spatie\Tags\HasTags;
+
+    protected $connection = \App\Services\UserDatabasesService::CONNECTION_NAME;
+
     protected $fillable = [
         'content',
-        'archived',
     ];
 
     protected $guarded = [
         'id',
         'created_at',
     ];
+
+    public function casts()
+    {
+        return [
+            'metadata' => 'array',
+        ];
+    }
 }
